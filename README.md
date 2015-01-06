@@ -27,3 +27,28 @@ app.controller('uploadsController',  function($scope, $http) {
   <input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files)">
 </div>
 ```
+<h3>UploadsController.php</h3>
+<p>Here I use <a href="http://image.intervention.io/" target="_blank">Intervention Image </a> for the upload process,
+For more info about integration in Laravel click <a href="http://image.intervention.io/getting_started/installation#laravel" target="_blank">here..</a></p>
+<p>'uploadImage' function in the backend inside our controller:</p>
+```php
+class UploadsController extends \BaseController {
+
+	public function uploadImage(){
+		$file = Input::file('file');
+		if ($file!=null) {
+	
+			$ext = $file->getClientOriginalExtension();
+			$image_name = str_random(15).'.'.$ext;
+		}
+	
+		if (!file_exists(public_path().'/uploads/images')) {
+			mkdir(public_path().'/uploads/images');
+		}
+		
+		Image::make(Input::file('file'))->save(public_path().'/uploads/images/'.$image_name);
+	
+		return Response::json([ 'success' => true ]);
+	}
+}
+```
