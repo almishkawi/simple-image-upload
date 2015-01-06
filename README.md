@@ -20,4 +20,10 @@ app.controller('uploadsController',  function($scope, $http) {
     });
 });
 ```
-
+<h3>upload.blade.php</h3>
+<p>Inside our view in laravel application:</p>
+```html
+<div ng-controller="uploadsController">
+  <input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files)">
+</div>
+```
