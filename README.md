@@ -52,3 +52,9 @@ class UploadsController extends \BaseController {
 	}
 }
 ```
+
+<h3>routes.php</h3>
+<p>last thing we need is to add our route:</p>
+```php
+Route::post('upload/image' , 'UploadsController@uploadImage');
+```
