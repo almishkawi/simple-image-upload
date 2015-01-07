@@ -20,7 +20,7 @@ app.controller('uploadsController',  function($scope, $http) {
     }).success(function(data) {
       if(data.success){
       	$scope.showLoader = false;
-			} 
+      } 
     });
   });
 });
