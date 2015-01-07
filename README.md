@@ -15,14 +15,14 @@ app.controller('uploadsController',  function($scope, $http) {
     formData.append("file", files[0]);
     $scope.showLoader = true;
     response = $http.post('/upload/image', formData, {
-          headers: {'Content-Type': undefined },
-          transformRequest: angular.identity
-      }).success(function(data) {
-    	  if(data.success){
-    	    $scope.showLoader = false;
-    	  } 
-  	});
+      headers: {'Content-Type': undefined },
+    	transformRequest: angular.identity
+    }).success(function(data) {
+      if(data.success){
+      	$scope.showLoader = false;
+			} 
     });
+  });
 });
 ```
 <h3>upload.blade.php</h3>
