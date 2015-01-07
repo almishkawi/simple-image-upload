@@ -13,10 +13,15 @@ app.controller('uploadsController',  function($scope, $http) {
   $scope.uploadImage = function(files) {
     var formData = new FormData();
     formData.append("file", files[0]);
+    $scope.showLoader = true;
     response = $http.post('/upload/image', formData, {
           headers: {'Content-Type': undefined },
           transformRequest: angular.identity
-      });
+      }).success(function(data) {
+    	  if(data.success){
+    	    $scope.showLoader = false;
+    	  } 
+  	});
     });
 });
 ```
@@ -27,6 +32,14 @@ app.controller('uploadsController',  function($scope, $http) {
   <input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files)">
 </div>
 ```
+<p>We can add a loader image to our view template and show it using <span>ng-show</span> :</p>
+```html
+<div ng-controller="uploadsController">
+  <img src="url/to/loaderImage" ng-show="showLoader" />	
+  <input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files)">
+</div>
+```
+
 <h3>UploadsController.php</h3>
 <p>Here I use <a href="http://image.intervention.io/" target="_blank">Intervention Image </a> for the upload process,
 For more info about integration in Laravel click <a href="http://image.intervention.io/getting_started/installation#laravel" target="_blank">here..</a></p>
