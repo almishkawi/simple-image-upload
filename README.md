@@ -9,7 +9,7 @@ How to Use:
 <h3>app.js</h3>
 <p>Angular code:</p>
 
-```angular
+```javascript
 var app = angular.module('app', []);
 
 app.controller('uploadsController',  function($scope, $http) {
